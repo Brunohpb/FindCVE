@@ -62,15 +62,12 @@ async def send_telegram_message(messages, telegram_token, chat_id):
 # Função principal
 def main():
     # Defina as informações do Telegram
-    #telegram_token = "6695220161:AAFHlGPsBnH4oLeQvLBOJXqQC56ZOm8muWY"
-    #chat_id = "-4039367589"
     telegram_token = config('TELEGRAM_TOKEN', default='')
     chat_id = config('CHAT_ID', default='')
     vendors = config('VENDORS', default='', cast=lambda v: [vendor.strip() for vendor in v.split(',')])
 
     # Defina as informações da API NVD
     base_url = "https://services.nvd.nist.gov/rest/json/cves/2.0/"
-    #vendors = ["dell", "linux"]  # Adicione seus vendors aqui
 
     # Agende a tarefa diária às 5:30 da manhã
     schedule.every().day.at("12:00").do(run_task, base_url, telegram_token, chat_id, vendors)
