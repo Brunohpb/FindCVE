@@ -1,0 +1,11 @@
+FROM python:3.11
+
+WORKDIR /opt/app
+
+COPY updatedcve/main.py /opt/app/
+
+RUN pip3 install schedule requests python-telegram-bot python-decouple
+
+ENV TZ="America/Sao_Paulo"
+
+CMD [ "python3", "-u", "main.py" ]

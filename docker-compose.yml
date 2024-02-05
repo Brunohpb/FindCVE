@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  updatecve:
+    container_name: updatecve
+    build:
+      context: .
+      dockerfile: ./updatecve/Dockerfile
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - CHAT_ID=${CHAT_ID}
+      - VENDORS=${VENDORS}
+    image: updatecve
+    restart: always
+  dailycve:
+    container_name: dailycve
+    build:
+      context: .
+      dockerfile: ./dailycve/Dockerfile
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - CHAT_ID=${CHAT_ID}
+      - VENDORS=${VENDORS}
+    image: dailycve
+    restart: always
